@@ -153,6 +153,7 @@ class MainMenuScene(Scene):
                             qnt_players = input_qnt_players()
                             self.scene_manager.net_module = net_module
                             self.scene_manager.max_qnt_players = qnt_players
+                            self.net_init()
 
                         if len(self.player_ids) < self.scene_manager.max_qnt_players or min(self.player_ids) < 0:
                             print(f"[WARNING] Остались необработаные игроки! (ids: {self.player_ids})")
@@ -294,3 +295,16 @@ class MainMenuScene(Scene):
         from .game_scene import GameScene
         self.scene_manager.set_scene(GameScene)
         self.all_buttons.empty()
+
+    def net_init(self):
+        if self.scene_manager.net_module is not None:
+            if isinstance(self.scene_manager.net_module, SoftClient):
+                self.scene_manager.local_player_id = randint(-32768, -1)
+                self.is_registration_request_send = False
+            else:
+                self.scene_manager.local_player_id = 0
+
+            self.player_ids = set([self.scene_manager.local_player_id])
+
+            self.is_starting = False
+            self.is_game_started = False
