@@ -66,7 +66,7 @@ class Market():
                         font32.render(f"Distance of visible : {self.taken_tank_menu.ttc["viewing"]}", True, (0, 0, 0)),
                         font32.render(f"Healf points : {self.taken_tank_menu.ttc["health"]}", True, (0, 0, 0)),
                         font32.render(f"Armor: {self.taken_tank_menu.ttc["armor"][0]}, {self.taken_tank_menu.ttc["armor"][1]}, {self.taken_tank_menu.ttc["armor"][2]}", True, (0, 0, 0)),
-                        font32.render(f"Mobility: {self.taken_tank_menu.ttc["mobility"][0]}, {self.taken_tank_menu.ttc["mobility"][1]}, {self.taken_tank_menu.ttc["mobility"][0]}", True, (0, 0, 0)),
+                        font32.render(f"Mobility: {self.taken_tank_menu.ttc["mobility"][0]}, {self.taken_tank_menu.ttc["mobility"][1]}, {self.taken_tank_menu.ttc["mobility"][2]}", True, (0, 0, 0)),
                         font32.render(f"Damage: {self.taken_tank_menu.ttc["damage"]}", True, (0, 0, 0)),
                         font32.render(f"Penedration: {self.taken_tank_menu.ttc["penetration"]}", True, (0, 0, 0)),
                         font32.render(f"Reloading: {self.taken_tank_menu.ttc["cooldown"]}", True, (0, 0, 0)),

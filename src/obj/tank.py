@@ -88,7 +88,8 @@ class Tank(pg.sprite.DirtySprite):
         self.viewing = self.ttc["viewing"]
         self.health = self.ttc["health"]
         self.armor_list = self.ttc["armor"].copy()
-        self.movement_balance_list =  self.ttc["mobility"].copy()
+        self.movement_balance_list = self.ttc["mobility"].copy()
+        self.movement_balance_list[1] = float("inf")
         self.damage = self.ttc["damage"]
         self.penetration = self.ttc["penetration"]
         self.cooldown = self.ttc["cooldown"]
