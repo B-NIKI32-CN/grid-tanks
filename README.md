@@ -6,8 +6,20 @@
 
 ## Запуск
 
-Зависимости: _python3_ ;
+Зависимости: 
+_python3_
 
-библиотеки: _pygame_ _numpy_ .
+библиотеки: 
+_pygame_ 
+_numpy_
 
-Для запуска введите команду _python -m src.main_ или _python -m src.main_
+Для запуска введите команду _python -m src.main_
+
+Установка библиотек:
+```
+python3 -m venv .venv
+
+source ./.venv/bin/activate  # на Ubuntu
+
+pip install pygame numpy
+```
