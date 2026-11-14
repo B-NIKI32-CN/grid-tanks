@@ -13,7 +13,7 @@ _python3_
 _pygame_ 
 _numpy_
 
-Для запуска введите команду _python -m src.main_
+Для запуска введите команду _python3 -m src.main_
 
 Установка библиотек:
 ```
