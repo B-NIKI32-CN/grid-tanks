@@ -185,6 +185,7 @@ class MainMenuScene(Scene):
                             net_module = SoftClient(server_addr)
                             print(f"Client (server: {server_addr})")
                             self.scene_manager.net_module = net_module
+                            self.net_init()
 
                         if not self.is_game_started:
                             print("[WARNING] Хост ещё не начал игру!")
