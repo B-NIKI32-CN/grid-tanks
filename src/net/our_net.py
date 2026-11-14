@@ -158,7 +158,7 @@ class SoftClient(SoftChannal):
 
         self.server_addr = server_addr
 
-        self.cooldown_conn_request = 1
+        self.cooldown_conn_request = 3
 
         self.connecting = False
         self.last_conn_request = 0
@@ -199,6 +199,10 @@ class SoftClient(SoftChannal):
             return False
 
     def hard_send(self):
+        if self.connections_cnt == 0:
+            # print("ТЫСЯЧА ЧЕРТЕЙ!!!!!!!!!!!!!!!SEND")
+            return
+        
         if len(self.send_buff) == 0:
             return
 
@@ -209,6 +213,10 @@ class SoftClient(SoftChannal):
         self.send_buff.clear()
     
     def hard_recv(self):
+        if self.connections_cnt == 0:
+            # print("ТЫСЯЧА ЧЕРТЕЙ!!!!!!!!!!!!!!!RECV")
+            return False
+        
         readable, _, _ = select.select([self.socket], [], [], 0)
         received = False
     
