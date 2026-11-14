@@ -44,18 +44,29 @@ def ip_addr_format(ip_addr_str: str):
         return None
 
 def input_server_addr():
+    # Ожидание, когда пользователь отпустит кнопку мыши, чтобы X11 снял захват
+    while any(pg.mouse.get_pressed()):
+        pg.event.pump()
+        pg.time.wait(10)
+
     addr = None
     while addr is None:
         addr_str = input("Адресс сервера: ")
         addr = ip_addr_format(addr_str)
         if addr is None:
             print("Ошибка ввода! Пример адресса: 127.0.0.1:1234")
+
     pg.event.clear()
     return addr
 
-
 def input_qnt_players():
+    # Ожидание, когда пользователь отпустит кнопку мыши, чтобы X11 снял захват
+    while any(pg.mouse.get_pressed()):
+        pg.event.pump()
+        pg.time.wait(10)
+    
     cnt = int(input("Количество игроков в игре: "))
+    
     pg.event.clear()
     return cnt
 
