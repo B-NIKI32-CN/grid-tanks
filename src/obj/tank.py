@@ -181,6 +181,7 @@ class Tank(pg.sprite.DirtySprite):
             self.reload_time_left = self.cooldown
             self.drowed_stats = False
             return projectile
+        return None
 
     def bullet_collide(self, bullet_angle, bullet_pos, bullet_dam, bullet_pen):
         tl = [self.rect.left - bullet_pos[0], self.rect.top - bullet_pos[1]]

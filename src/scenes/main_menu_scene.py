@@ -50,10 +50,17 @@ def input_server_addr():
         addr = ip_addr_format(addr_str)
         if addr is None:
             print("Ошибка ввода! Пример адресса: 127.0.0.1:1234")
+    pg.event.clear()
     return addr
 
-class MainMenuScene(Scene):
 
+def input_qnt_players():
+    cnt = int(input("Количество игроков в игре: "))
+    pg.event.clear()
+    return cnt
+
+
+class MainMenuScene(Scene):
 
     def __init__(self, scene_manager: SceneManager):
         super().__init__(scene_manager)
@@ -130,13 +137,11 @@ class MainMenuScene(Scene):
 
                     elif collidespritepoint(self.button_offline, event.pos):
                         self.where = "offline"
-                        qnt_players = int(input("Количество игроков в игре: "))
+                        qnt_players = input_qnt_players()
                         self.scene_manager.net_module = None
                         self.scene_manager.max_qnt_players = qnt_players
 
-                        from .game_scene import GameScene
-                        self.scene_manager.set_scene(GameScene)
-                        self.all_buttons.empty()
+                        self.start_game_scene()
                         
                 elif self.where == "select_online_role":
 
@@ -145,7 +150,7 @@ class MainMenuScene(Scene):
                             server_addr = input_server_addr()
                             net_module = SoftServer(server_addr)
                             print(f"SERVER {server_addr}")
-                            qnt_players = int(input("Количество игроков в игре: "))
+                            qnt_players = input_qnt_players()
                             self.scene_manager.net_module = net_module
                             self.scene_manager.max_qnt_players = qnt_players
 
@@ -159,31 +164,23 @@ class MainMenuScene(Scene):
                             signal = signals_collector.start_game(len(self.player_ids), self.scene_manager.cur_map_id)
                             self.scene_manager.net_module.add(signal)
 
-                        from .game_scene import GameScene
-                        self.scene_manager.set_scene(GameScene)
-                        self.all_buttons.empty()
+                        self.start_game_scene()
 
 
-                        if collidespritepoint(self.button_client, event.pos):
-                            if self.scene_manager.net_module is None:
-                                server_addr = input_server_addr()
-                                net_module = SoftClient(server_addr)
-                                print(f"Client (server: {server_addr})")
-                                self.scene_manager.net_module = net_module
+                    elif collidespritepoint(self.button_client, event.pos):
+                        if self.scene_manager.net_module is None:
+                            server_addr = input_server_addr()
+                            net_module = SoftClient(server_addr)
+                            print(f"Client (server: {server_addr})")
+                            self.scene_manager.net_module = net_module
 
-                            if not self.is_game_started:
-                                print("[WARNING] Хост ещё не начал игру!")
-                                continue
+                        if not self.is_game_started:
+                            print("[WARNING] Хост ещё не начал игру!")
+                            continue
 
-                            from .game_scene import GameScene
-                            self.scene_manager.set_scene(GameScene)
-                            self.all_buttons.empty()
+                        self.start_game_scene()
                     
-
-                    
-
-
-
+                
     def update(self):
         ### NET
         if self.scene_manager.net_module is not None:
@@ -292,4 +289,8 @@ class MainMenuScene(Scene):
 
         return False
 
-
+    
+    def start_game_scene(self):
+        from .game_scene import GameScene
+        self.scene_manager.set_scene(GameScene)
+        self.all_buttons.empty()

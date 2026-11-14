@@ -79,7 +79,8 @@ class GameManager():
                                                 Projectile, self.id_cnt, self)
         self.id_dict[self.id_cnt] = projectile
         self.id_cnt += 1
-        all_world_sprites.add(projectile)
+        if projectile is not None:
+            all_world_sprites.add(projectile)
         return projectile
 
     def move_tank(self, tank_id, direction: str):
