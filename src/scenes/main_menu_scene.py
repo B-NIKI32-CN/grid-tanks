@@ -292,8 +292,11 @@ class MainMenuScene(Scene):
                     if "qnt_players" not in signal["args"]: return False
                     if "map_id" not in signal["args"]: return False
 
+                    self.scene_manager.max_qnt_players = signal["args"]["qnt_players"]
+                    
                     for id in range(signal["args"]["qnt_players"]):
                         self.player_ids.add(id)
+
                     self.scene_manager.cur_map_id = signal["args"]["map_id"]
 
                     self.is_game_started = True
