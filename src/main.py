@@ -7,12 +7,9 @@ from .net.our_net import SoftServer, SoftClient
 
 
 
-
-
 # localhost 127.0.0.1:1234 
 # lik 10.26.229.238:1234 
 # nik 10.26.229.165:1234
-
 
 
 
